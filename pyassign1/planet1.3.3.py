@@ -55,7 +55,6 @@ e.color(165/255, 42/255, 42/255)
 f.color(255/255, 165/255, 0/255)
 g.color(139/255, 69/255, 19/255)
 w.color('white')
-w.color('white')
 
 for i in range(6):
 	planet[i].hideturtle()
@@ -141,9 +140,9 @@ def saturn(i):
 #Date
 # 1 degree = (87.9/360)d
 def date(i):
-	x = -(int(m.log10(int(i)+1)) * 11 + 20)
+	x = -(int(m.log10(int(i)+1)) * 9 + 20)
 	y = -265 
-	w.undo()
+	w.clear()
 	w.speed(0)
 	w.penup()
 	w.goto(x, y)
