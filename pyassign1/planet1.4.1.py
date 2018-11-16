@@ -1,8 +1,9 @@
 # 作者：宋怀雨
 # 化学与分子工程学院
 
-# v1.4.0更新说明
+# v1.4.1更新说明
 # 加了一个月亮！OvO
+# 修复了一个神秘bug
 
 import turtle
 import math as m
@@ -166,7 +167,7 @@ def date(i):
 	w.penup()
 	w.goto(x, y)
 	w.pendown()
-	if ('%.1f' % i)==11.3:
+	if ('%.1f' % i)=='11.3':
 		w.write('iG牛逼！')
 	else:
 		w.write(str('%.1f' % i) + "year", font=("Arial", 12, "bold"))
