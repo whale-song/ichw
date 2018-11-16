@@ -49,8 +49,8 @@ h.fd(167)
 h.pendown()
 j = 0
 
-morbit.lt(90) #初始化月球轨道
-morbit.hideturtle() 
+morbit.lt(90) #初始化月球轨道 
+morbit.hideturtle()  
 morbit.pensize(0.3)
 morbit.speed(0)
 
@@ -96,15 +96,9 @@ def mercury(i):
     if i >= 360:
     	b.penup()
 
-# Venus
-# a=108208000, b=108206759, e=0.006772, c=732784
-# T=224.7d
-def venus(i):
-    x=108 * m.cos(3.14*i/180)+0.7
-    y=107 * m.sin(3.14*i/180)
-    c.goto(x,y)
-    if i >= 360:
-    	c.penup()
+# Venus # a=108208000, b=108206759, e=0.006772, c=732784 # T=224.7d def
+venus(i):     x=108 * m.cos(3.14*i/180)+0.7     y=107 * m.sin(3.14*i/180)
+c.goto(x,y)     if i >= 360:         c.penup()
 
 # Earth
 # a=149598023, b=14957580, e=0.0167086, c=2499573
@@ -171,7 +165,7 @@ def date(i):
 	w.goto(x, y)
 	w.pendown()
 	if ('%.1f' % i)=='11.3':
-		w.write('iG牛逼！')
+		w.write('iG牛逼！', font=('MicrosoftYaHei',20))
 	else:
 		w.write(str('%.1f' % i) + "year", font=("Arial", 12, "bold"))
 
@@ -181,7 +175,6 @@ if __name__ == '__main__':
 		for n in range(360*122):
 			if n%155 == 0:
 				date(j)
-
 			if n%6 == 0:
 				mercury(n)
 			elif n%6 == 1:

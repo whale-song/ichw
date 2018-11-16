@@ -168,7 +168,7 @@ def date(i):
 	w.goto(x, y)
 	w.pendown()
 	if ('%.1f' % i)=='11.3':
-		w.write('iG牛逼！')
+		w.write('iG牛逼！', font=('MicrosoftYaHei',20))
 	else:
 		w.write(str('%.1f' % i) + "year", font=("Arial", 12, "bold"))
 
