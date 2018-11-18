@@ -4,6 +4,7 @@
 # v1.4.1更新说明
 # 加了一个月亮！OvO
 # 修复了一个神秘bug
+# *本版本显示月球轨迹
 
 import turtle
 import math as m
@@ -96,9 +97,15 @@ def mercury(i):
     if i >= 360:
     	b.penup()
 
-# Venus # a=108208000, b=108206759, e=0.006772, c=732784 # T=224.7d def
-venus(i):     x=108 * m.cos(3.14*i/180)+0.7     y=107 * m.sin(3.14*i/180)
-c.goto(x,y)     if i >= 360:         c.penup()
+# Venus
+# a=108208000, b=108206759, e=0.006772, c=732784
+# T=224.7d
+def venus(i):
+    x=108 * m.cos(3.14*i/180)+0.7
+    y=107 * m.sin(3.14*i/180)
+    c.goto(x,y)
+    if i >= 360:
+    	c.penup()
 
 # Earth
 # a=149598023, b=14957580, e=0.0167086, c=2499573
