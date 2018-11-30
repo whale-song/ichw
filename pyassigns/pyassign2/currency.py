@@ -6,12 +6,13 @@
 # v1.0
 # 完成了程序总框架搭建。
 # v1.1
-# 添加了测试模块。（随机输入模块尚在建设中）
+# 添加了测试模块和随机输入模块。
 # 改善了输入/输出的视觉效果。
 # 增加了输入合法性判断，优化了部分算法。
 
-# 调用url模块
+# 调用url模块和随机模块
 from urllib.request import urlopen
+import random
 
 # 部分参数初始化
 global currency_from, currency_to, amount_from
@@ -30,8 +31,8 @@ currency_list = ['AED', 'AFN', 'ALL', 'AMD', 'ANG', 'AOA', 'ARS', 'AUD', 'AWG', 
                  'QAR', 'RON', 'RSD', 'RUB', 'RWF', 'SAR', 'SBD', 'SCR', 'SDG', 'SEK', 
                  'SGD', 'SHP', 'SLL', 'SOS', 'SRD', 'STD', 'SVC', 'SYP', 'SZL', 'THB', 
                  'TJS', 'TMT', 'TND', 'TOP', 'TRY', 'TTD', 'TWD', 'TZS', 'UAH', 'UGX', 
-                 'USD', 'UYU', 'UZS', 'VEF', 'VEF', 'VND', 'VUV', 'WST', 'XAF', 'XAG', 
-                 'XAU', 'XCD', 'XDR', 'XOF', 'XPD', 'XPF', 'XPT', 'YER', 'ZAR', 'ZMK', 'ZMW', 'ZWL'] # 货币列表，输入合法性检测用。
+                 'USD', 'UYU', 'UZS', 'VEF', 'VND', 'VUV', 'WST', 'XAF', 'XAG', 'XAU', 
+                 'XCD', 'XDR', 'XOF', 'XPD', 'XPF', 'XPT', 'YER', 'ZAR', 'ZMK', 'ZMW', 'ZWL'] # 货币列表，输入合法性检测用。
 line = '-'*30
 
 # 数据输入函数
@@ -49,8 +50,7 @@ def exchange():
     doc = urlopen(url_request) # 从网页抓取数据
     docstr = doc.read()
     doc.close()
-    jstr = docstr.decode('ascii')
-    jstr = jstr.replace('true', 'True')
+    jstr = (docstr.decode('ascii')).replace('true', 'True')
     jstr = jstr.replace('false', 'False')
     strdict = eval(jstr)
     amount_to = strdict['to']
@@ -61,7 +61,7 @@ def test_input():
     if  currency_from in currency_list and currency_to in currency_list:
         try:
             testnum = float(amount_from)
-        except(ValueError):
+        except ValueError:
             return '输入有误，请确保兑换量为数字。'
         else:
             return '输入合法。'
@@ -80,31 +80,36 @@ def test_output():
     tstr = tstr.replace('false','False')
     tstr = eval(tstr)
     tto = tstr['to']
-    if tto == amount_to:
-        return '数据无误。'
+    try:    # 使用try函数，以中文错误信息替代Trace Back
+        assert tto == amount_to
+    except AssertionError:
+        return 'exchange()模块存在问题，程序中止。'
     else:
-        return '该数据存在问题，请联系开发者。'
+        return '输出无误，可正常运行。'
 
 # 随机输入模块（检测用）
-# （建设中）
-def random_input():
-    import random
+def random_input(p):
     global currency_from, currency_to, amount_from
-    currency_from = currency_list[random.randint(0,192)]
-    currency_to = currency_list[random.randint(0,192)]
+    currency_from = currency_list[random.randint(0,171)]
+    currency_to = currency_list[random.randint(0,171)]
     amount_from = str(random.randrange(1000))
-    print(line + '\n' + '本次随机结果：\n'
-        + '输入货币：' + currency_from + '\n'
-        + '输出货币：' + currency_to + '\n'
-        + '兑换量：' + amount_from)
+    if p == True:
+        print(line + '\n' + '本次随机结果：\n'
+            + '输入货币：' + currency_from + '\n'
+            + '输出货币：' + currency_to + '\n'
+            + '兑换量：' + amount_from)
 
 def main():
-    while True:     # 无限循环，使查询函数可不限次使用。
+    print('运行检测中...')
+    random_input(False)
+    exchange()
+    print(test_output())
+    while test_output() == '输出无误，可正常运行。':     # 无限循环，使查询函数可不限次使用。
         rj = input('是否采取随机输入？ y/n \n')
         if rj == 'n':
             data_input()    # 数据输入函数
         elif rj == 'y':
-            random_input()
+            random_input(True)
         else:
             print('输入不合法，请检查您的输入：是(y)/否(n)')
             main()
@@ -113,9 +118,6 @@ def main():
             break
         exchange()
         print(line + '\n转换结果：\n' +  exchange() + '\n' + line)
-        if input('是否进行测试？ y/n \n') == 'y':
-            print(test_output())  
-        print(line)
 
 if __name__ == '__main__':
     main()
