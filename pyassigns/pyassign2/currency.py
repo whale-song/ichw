@@ -7,6 +7,7 @@ __pkuid__ = '1800011751'
 __email__ = 'whalesong@pku.edu.cn'
 __version__ = '1.2.2'
 '''
+
 # v1.0
 # 完成了程序总框架搭建。
 
@@ -72,8 +73,14 @@ def exchange():
        jstr: 解码后的json格式字符串
        strdict: eval后获得的字典'''
     global amount_to
-    url_request = str('http://cs1110.cs.cornell.edu/2016fa/a1server.php?from=' 
-        + currency_from.upper() + '&to=' + currency_to.upper() + '&amt=' + amount_from) # url请求
+
+    url_request = str(
+        'http://cs1110.cs.cornell.edu/2016fa/a1server.php?from='
+        + currency_from.upper()
+        + '&to=' + currency_to.upper()
+        + '&amt=' + amount_from
+    )                                                   # url请求
+    
     doc = urlopen(url_request)                          # 从网页抓取数据
     docstr = doc.read()
     doc.close()
@@ -152,5 +159,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-    
