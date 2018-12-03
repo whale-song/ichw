@@ -1,8 +1,12 @@
-# 作者：宋怀雨
-# 化学与分子工程学院
+#!/usr/bin/env python3
 
-# 货币兑换(python源码版)
+'''currency.py: 通过向特定服务器请求以进行货币兑换。
 
+__author__ = 'Whale Song'
+__pkuid__ = '1800011751'
+__email__ = 'whalesong@pku.edu.cn'
+__version__ = '1.2.2'
+'''
 # v1.0
 # 完成了程序总框架搭建。
 
@@ -121,10 +125,12 @@ def random_input(p):
     currency_to = currency_list[random.randint(0,170)]
     amount_from = str(random.randrange(1000))
     if p == True:
-        print(line + '\n' + '本次随机结果：\n'
+        print(
+            line + '\n' + '本次随机结果：\n'
             + '输入货币：' + currency_from + '\n'
             + '输出货币：' + currency_to + '\n'
-            + '兑换量：' + amount_from)
+            + '兑换量：' + amount_from
+        )
 
 def main():
     print('运行检测中...')
