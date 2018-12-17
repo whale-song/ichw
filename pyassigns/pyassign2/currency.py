@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 
-'''currency.py: 通过向特定服务器请求以进行货币兑换。
+#currency.py: 通过向特定服务器请求以进行货币兑换。
 
 __author__ = 'Whale Song'
 __pkuid__ = '1800011751'
 __email__ = 'whalesong@pku.edu.cn'
 __version__ = '1.2.2'
-'''
 
 # v1.0
 # 完成了程序总框架搭建。
