@@ -1,3 +1,20 @@
+#!/usr/bin/env python3
+
+"""
+tile.py: count words from an Internet file.
+
+__author__ = "WhaleSong"
+__pkuid__  = "1800011751"
+__email__  = "whalesong@pku.edu.cn"
+__version__ = 2.3.0
+
+更新日志：
+2.3.0
+在穷举中增添了规避算法，对出错节点进行规避，从而避免对错误结果的多次重复运算。
+"""
+
+# 本版本为铺砖的穷举版本，旨在通过生成相应长度的二进制数覆盖所有可能的铺法。
+
 import turtle
 from time import process_time, sleep
 
@@ -123,6 +140,13 @@ def tile():
                 break
 
 def draw_brick(turtle, direction, length, width):
+    '''
+    draw a tile in horizontal or vertical direction.
+    turtle: the name of the running turtle.
+    direction: the direction to draw the tile.
+    length: length of the tile.
+    width: width of the tile.
+    '''
     if direction == 'horizontal':
         for i in range(2):
             turtle.fd(length*20)
@@ -137,9 +161,16 @@ def draw_brick(turtle, direction, length, width):
             turtle.lt(90)
 
 def draw():
+    '''
+    use the turtle to draw the wall and tiles.
+    choice: the method of tiling that user selected.
+    brick: the very tile that is being drawn.
+    t1: the drawing turtle.
+    t2: the writing turtle(currently not used).
+    '''
     t1 = turtle.Turtle()
     t2 = turtle.Turtle()
-    t1.speed(1)
+    t1.speed(0)
     t2.hideturtle()
     t2.speed(0)
     choice = int(
@@ -167,25 +198,30 @@ def draw():
     turtle.done()
 
 
-def main():
-    data_input()
-    t0 = process_time()
+def main(): 
+    data_input()    #输入数据
+    t0 = process_time()     #记录开始时间
     if t_length == t_width:
-        tile_squares()
+        tile_squares()      #遇正方形砖运行简化算法
     else:
-        while method <= (maximum):
+        while method <= (maximum):      #设置运行次数上限
             tile()
-    t1 = process_time()
-    if ways == []:
+    t1 = process_time()     #记录结束时间
+    if ways == []:      #若为空结果则退出
         print('铺不满。\n exit in 10 seconds...')
         sleep(10)
         exit()
     for i in range(len(ways)):
-        print(i+1, ways[i])
-    print(t1 - t0, 'secs')
+        print(i+1, ways[i])     #输出各铺法
+    print(
+        '\n', '-' * 30, '\n',
+        '{} methods in total, using {} seconds.\n'.format(
+        len(ways), t1-t0
+        ),
+        '-'*30
+    )
     if input('choose one to draw? y/n\n') == 'y':
         draw()
 
 if __name__ == '__main__':
     main()
-    input()
