@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-tile.py: count words from an Internet file.
+tile.py: calculate all the possible methods to tile a selected wall.
 
 __author__ = "WhaleSong"
 __pkuid__  = "1800011751"
