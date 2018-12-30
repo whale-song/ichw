@@ -12,7 +12,7 @@ __email__  = "whalesong@pku.edu.cn"
 import sys
 from urllib.request import urlopen, URLError
 
-replace_list = [',', '.', '?', '!', '\"', '\"', '[', ']', '_', ';', '/', '-', '\'s']
+replace_list = [',', '.', '?', '!', '\"', '\"', '[', ']', '_', ';', '/', '-', '\'s', '(', ')']
 
 def check_request():
     '''check if the input url and lines exist and legal.
